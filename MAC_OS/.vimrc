@@ -1,0 +1,58 @@
+call plug#begin('~/.vim/plugins')
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'w0rp/ale'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'majutsushi/tagbar'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'wakatime/vim-wakatime'
+Plug 'wincent/ferret'
+Plug 'mhartington/oceanic-next'
+Plug 'dickeyxxx/tmux-spotify-info'
+Plug 'tpope/vim-obsession'
+call plug#end()
+
+syntax enable
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+let g:jsx_ext_required=0
+
+set backupdir=~/.vim/backups
+set directory=~/.vim/backups
+
+set listchars=eol:¬,tab:>-,trail:~,space:·
+set list
+
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+
+colorscheme OceanicNext
+
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
+
+map <C-p> :Files<CR>
+
+map <C-n> :NERDTreeToggle<CR>
+
