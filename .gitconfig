@@ -1,0 +1,11 @@
+[user]
+	name = Shem Sedrick
+	email = ssedrick1@gmail.com
+
+[alias]
+	c = commit
+  co = checkout
+  s = status
+  com = checkout master
+  sa = stash apply
+	ph = push heroku production:master
