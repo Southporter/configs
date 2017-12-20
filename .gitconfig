@@ -4,8 +4,10 @@
 
 [alias]
 	c = commit
-  co = checkout
-  s = status
-  com = checkout master
-  sa = stash apply
+	co = checkout
+	s = status
+	com = checkout master
+	sa = stash apply
 	ph = push heroku production:master
+	b = branch
+
