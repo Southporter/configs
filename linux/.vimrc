@@ -20,8 +20,11 @@ Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe'
 Plug 'majutsushi/tagbar'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-commentary'
 Plug 'wakatime/vim-wakatime'
 Plug 'mhartington/oceanic-next'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 set background=dark
