@@ -11,3 +11,5 @@
 	ph = push heroku production:master
 	b = branch
 
+[core]
+	excludesfile = ~/.gitignore_global
