@@ -38,14 +38,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |Adjust| Ctrl | Alt  | GUI  |Lower |Space |Space |Raise | Left | Down |  Up  |Right |
+ * |Adjust| Ctrl | Alt  | GUI  | Tab  |Lower |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
   KC_ESC,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
   KC_LCTL,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT, \
   KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-  ADJUST,   KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_TAB,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+  ADJUST,   KC_LCTL, KC_LALT, KC_LGUI, KC_TAB,  LOWER,   KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
 ),
 
 /* Colemak
@@ -74,14 +74,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |Adjust| Ctrl | Alt  | GUI  |Lower |Space |Space |Raise | Left | Down |  Up  |Right |
+ * |Adjust| Ctrl | Alt  | GUI  |  Tab |Lower |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_DVORAK] = KEYMAP( \
-  KC_ESC, KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
-  KC_LCTL,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
-  KC_LSFT,  KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, KC_SCLN, \
-  ADJUST,   KC_ESC, KC_LALT, KC_LGUI, LOWER,   KC_TAB,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+  KC_ESC,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
+  KC_LCTL, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_ENT, \
+  KC_LSFT, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SLSH, KC_SCLN, \
+  ADJUST,  KC_ESC,  KC_LALT, KC_LGUI, KC_TAB,  LOWER,   KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
 ),
 
 /* Lower
@@ -96,17 +96,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
-  KC_TILD,    KC_EXLM,      KC_AT, KC_HASH,  KC_DLR, KC_PERC, KC_CIRC,    KC_7,    KC_8,    KC_9, KC_BSLS, KC_BSPC, \
-  _______, S(KC_LBRC), S(KC_RBRC), S(KC_9), S(KC_0),  KC_EQL, KC_PIPE,    KC_4,    KC_5,    KC_6, KC_QUOT, _______, \
-  BL_STEP,    KC_LBRC,    KC_RBRC, _______, _______, _______, _______,    KC_1,    KC_2,    KC_3,  KC_DOT, KC_MPRV, \
-  _______,    _______,    _______, _______, _______, _______, _______,    KC_0, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
+  KC_TILD, KC_EXLM,    KC_AT,      KC_HASH, KC_DLR,  KC_PERC, KC_CIRC,    KC_7, KC_8,    KC_9,    KC_BSLS, KC_BSPC, \
+  _______, S(KC_LBRC), S(KC_RBRC), S(KC_9), S(KC_0), KC_EQL,  KC_PIPE,    KC_4, KC_5,    KC_6,    KC_QUOT, _______, \
+  BL_STEP, KC_LBRC,    KC_RBRC,    _______, _______, _______, _______,    KC_1, KC_2,    KC_3,    KC_DOT,  KC_MPRV, \
+  _______, _______,    _______,    _______, _______, _______, _______,    KC_0, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Del  |      |      |      |     |      |      |   -  |   =  |   [  |   ]  |Enter |
+ * | Del  |      |      |      |   "  |      |      |   -  |   =  |   [  |   ]  |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |Adjust|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
