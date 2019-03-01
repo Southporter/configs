@@ -20,3 +20,6 @@
 
 [help]
 	autocorrect = 3
+
+[push]
+	default = simple
