@@ -11,8 +11,16 @@
 	ph = push heroku production:master
 	b = branch
 	pfl = push --force-with-lease
+  cam = commit -am
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  l = log --all --decorate --oneline --graph
 
 [core]
 	excludesfile = ~/.gitignore
+	editor = vim
+
+[help]
+	autocorrect = 3
+
 [push]
 	default = simple

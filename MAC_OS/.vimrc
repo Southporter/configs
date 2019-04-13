@@ -12,14 +12,12 @@ Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'wakatime/vim-wakatime'
 Plug 'wincent/ferret'
 Plug 'mhartington/oceanic-next'
 Plug 'jparise/vim-graphql'
-Plug 'dickeyxxx/tmux-spotify-info'
 Plug 'tpope/vim-obsession'
 call plug#end()
 
@@ -29,6 +27,7 @@ if (has("termguicolors"))
 endif
 
 let g:jsx_ext_required=0
+let g:ale_linters = {'javascript': ['eslint']}
 
 set backupdir=~/.vim/backups
 set directory=~/.vim/backups
