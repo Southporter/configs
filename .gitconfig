@@ -10,6 +10,7 @@
 	sa = stash apply
 	ph = push heroku production:master
 	b = branch
+	pfl = push --force-with-lease
 
 [core]
 	excludesfile = ~/.gitignore

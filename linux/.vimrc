@@ -16,14 +16,18 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'majutsushi/tagbar'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-commentary'
 Plug 'wakatime/vim-wakatime'
 Plug 'mhartington/oceanic-next'
+Plug 'wincent/ferret'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+Plug 'valloric/youcompleteme'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 set background=dark
@@ -44,4 +48,4 @@ map <C-p> :Files<CR>
 
 map <C-n> :NERDTreeToggle<CR>
 
-let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_linters = { 'javascript': ['eslint', 'tsserver'] }
