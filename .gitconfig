@@ -1,15 +1,16 @@
 [user]
-	name = Shem Sedrick
-	email = ssedrick1@gmail.com
+  name = Shem Sedrick
+  email = ssedrick1@gmail.com
 
 [alias]
-	c = commit
-	co = checkout
-	s = status
-	com = checkout master
-	sa = stash apply
-	ph = push heroku production:master
-	b = branch
+  c = commit
+  co = checkout
+  s = status
+  com = checkout master
+  sa = stash apply
+  ph = push heroku production:master
+  b = branch
+  pfl = push --force-with-lease
   cam = commit -am
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   l = log --all --decorate --oneline --graph
@@ -17,17 +18,22 @@
   rom = restore -s origin/master --
 
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 
 [help]
-	autocorrect = 3
+  autocorrect = 3
+
+[init]
+  defaultBranch = master
 
 [push]
-	default = simple
+  default = simple
+
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+
