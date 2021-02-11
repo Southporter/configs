@@ -13,6 +13,8 @@
   cam = commit -am
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   l = log --all --decorate --oneline --graph
+  pfl = push --force-with-lease
+  rom = restore -s origin/master --
 
 [core]
 	excludesfile = ~/.gitignore
@@ -23,3 +25,9 @@
 
 [push]
 	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
