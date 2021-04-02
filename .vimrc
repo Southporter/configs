@@ -17,14 +17,16 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'wincent/ferret'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Code Help
+Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
+Plug 'majutsushi/tagbar'
 Plug 'w0rp/ale'
 " Plug 'Valloric/YouCompleteMe', { 'for': ['go', 'rust', 'typescript', 'javascript', 'typescript.tsx', 'javascript.jsx', 'python'], 'do': 'python3 ~/.vim/plugins/YouCompleteMe/install.py --clang-completer --ts-completer --go-completer --rust-completer', 'commit': '4e480a3' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'lejafar/vim-pipenv-ycm', { 'for': ['python'] }
 Plug 'editorconfig/editorconfig-vim'
 
 " Language Specific
@@ -50,7 +52,7 @@ call plug#end()
 
 syntax enable
 filetype plugin indent on
-if (has("termguicolors"))
+if (has("macunix") && has("termguicolors"))
   set termguicolors
 endif
 
@@ -71,7 +73,6 @@ set softtabstop=2
 set shiftwidth=2
 
 set number
-" set relativenumber
 
 set incsearch hls
 
