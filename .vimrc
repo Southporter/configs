@@ -40,6 +40,8 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug 'martinda/jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' }
 Plug 'ekalinin/dockerfile.vim', { 'for': ['Dockerfile', 'yaml.docker-compose'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'dag/vim-fish', { 'for': 'fish' }
+Plug 'pearofducks/ansible-vim'
 
 
 " Ergonomics
