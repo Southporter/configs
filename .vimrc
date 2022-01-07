@@ -20,7 +20,7 @@ Plug 'wincent/ferret'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Code Help
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'

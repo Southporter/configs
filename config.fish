@@ -1,7 +1,10 @@
 source ~/.asdf/asdf.fish
 
 
-set -x PATH $PATH /home/ssedrick/.local/bin /home/ssedrick/.cargo/bin /home/ssedrick/go/bin
+# contains /snap/bin $PATH; or set -x PATH $PATH /snap/bin
+contains /home/ssedrick/.local/bin $PATH; or set -x PATH $PATH /home/ssedrick/.local/bin
+contains /home/ssedrick/.cargo/bin $PATH; or set -x PATH $PATH /home/ssedrick/.cargo/bin
+contains /home/ssedrick/go/bin $PATH; or set -x PATH $PATH /home/ssedrick/go/bin
 set -x GOPATH /home/ssedrick/go
 
 alias k "kubectl"
@@ -23,21 +26,7 @@ function init-ssh
     if test $agent_check -lt 2
       eval (ssh-agent -c)
     end
-    add-ssh-key ~/.ssh/id_rsa
-    add-ssh-key ~/.ssh/dev_rsa
-    add-ssh-key ~/.ssh/sandbox_rsa
-end
-
-function ecr-login
-     aws ecr get-login-password --profile eu --region eu-west-1 | podman login --username AWS --password-stdin  004782760466.dkr.ecr.eu-west-1.amazonaws.com
-end
-
-function source-enc
-    sops -d $argv[1] | jq -r ".data" | source -
-end
-
-function source-sops
-    sops -d $argv[1] | source -
+    # Add keys here
 end
 
 function gen-pass
