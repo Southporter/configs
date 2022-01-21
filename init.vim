@@ -19,6 +19,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'f3fora/cmp-spell'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'windwp/nvim-autopairs'
+Plug 'tpope/vim-commentary'
 
 " Language Specific
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
