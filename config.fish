@@ -1,11 +1,24 @@
-source ~/.asdf/asdf.fish
+switch (uname)
+  case Darwin
+    # For homebrew asdf
+    source (brew --prefix asdf)/libexec/asdf.fish >> ~/.config/fish/config.fish
+    if test -d (brew --prefix)"/share/fish/completions"
+      set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
+    end
+
+    if test -d (brew --prefix)"/share/fish/vendor_completions.d"
+        set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+    end
+  case '*'
+    source ~/.asdf/asdf.fish
+end
 
 
 # contains /snap/bin $PATH; or set -x PATH $PATH /snap/bin
-contains /home/ssedrick/.local/bin $PATH; or set -x PATH $PATH /home/ssedrick/.local/bin
-contains /home/ssedrick/.cargo/bin $PATH; or set -x PATH $PATH /home/ssedrick/.cargo/bin
-contains /home/ssedrick/go/bin $PATH; or set -x PATH $PATH /home/ssedrick/go/bin
-set -x GOPATH /home/ssedrick/go
+contains $HOME/.local/bin $PATH; or set -x PATH $PATH $HOME/.local/bin
+contains $HOME/.cargo/bin $PATH; or set -x PATH $PATH $HOME/.cargo/bin
+contains $HOME/go/bin $PATH; or set -x PATH $PATH $HOME/go/bin
+set -x GOPATH $HOME/go
 
 alias k "kubectl"
 alias kctx "kubectx"
