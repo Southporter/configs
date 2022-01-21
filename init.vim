@@ -13,8 +13,11 @@ Plug 'nvim-lua/lsp_extensions.nvim'
 " Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'f3fora/cmp-spell'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'windwp/nvim-autopairs'
 
 " Language Specific
@@ -62,26 +65,24 @@ let g:netrw_winsize = 20
 
 lua <<EOF
   require'lspconfig'.terraformls.setup{}
-  require'lspconfig'.pyright.setup{}
+--  require'lspconfig'.pyright.setup{}
   require'lspconfig'.rls.setup{}
   require'nvim-autopairs'.setup{}
-  require'cmp'.setup{
+  local cmp = require'cmp'
+  cmp.setup{
     sources = {
-      { name = 'cmp_tabnine' },
+      { name = 'spell' },
+      { name = 'buffer' },
+      { name = 'nvim_lsp' },
+      { name = 'path' },
+      { name = 'cmdline' },
+      { name = 'emoji' },
+    },
+    mapping = {
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
   }
-  local tabnine = require('cmp_tabnine.config')
-  tabnine:setup({
-    max_lines = 1000;
-    max_num_results = 20;
-    sort = true;
-    run_on_every_keystroke = true;
-    snippet_placeholder = '..';
-    ignored_file_types = { -- default is not to ignore
-      -- uncomment to ignore in lua:
-      -- lua = true
-    };
-  })
 EOF
 autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
 
