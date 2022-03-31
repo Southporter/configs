@@ -33,7 +33,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'yuezk/vim-js', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript.jsx', 'typescript.tsx'] }
-Plug 'fatih/vim-go', { 'for': 'go' }
+" Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescript.tsx' }
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
@@ -42,6 +42,8 @@ Plug 'ekalinin/dockerfile.vim', { 'for': ['Dockerfile', 'yaml.docker-compose'] }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'pearofducks/ansible-vim'
+Plug 'ron-rs/ron.vim'
+Plug 'google/protobuf', { 'for': 'proto' }
 
 
 " Ergonomics
