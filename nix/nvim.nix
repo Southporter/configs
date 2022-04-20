@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  pkgsUnstable = import <nixpkgs-unstable> {};
+  unstable = import inputs.pkgs-unstable { inherit (pkgs.stdenv.targetPlatform) system; };
 in
 {
   programs.neovim = {
-    package = pkgsUnstable.neovim-unwrapped;
+    package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
     withPython3 = true;
@@ -16,6 +16,7 @@ in
       silver-searcher
       rnix-lsp
       rls
+      ripgrep
     ];
 
     plugins = with pkgs.vimPlugins; [

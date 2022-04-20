@@ -1,10 +1,4 @@
-{ config, pkgs, ... }:
-let
-  cfgs = builtins.fetchGit {
-    url = "https://github.com/ssedrick/configs.git";
-    ref = "master";
-  };
-in
+{ config, pkgs, cfgs, ... }:
 {
 
   imports = [ ./nvim.nix ./sway.nix ];

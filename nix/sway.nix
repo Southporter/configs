@@ -1,11 +1,7 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, cfgs, inputs, ... }:
 
 let
-  pkgsUnstable = import <nixpkgs-unstable> {};
-  cfgs = builtins.fetchGit {
-    url = "https://github.com/ssedrick/configs.git";
-    ref = "master";
-  };
+  unstable = import inputs.pkgs-unstable { inherit (pkgs.stdenv.targetPlatform) system; };
 in
 {
   home.packages = with pkgs; [
@@ -65,7 +61,7 @@ in
   };
 
   programs.waybar = {
-    package = pkgsUnstable.waybar;
+    package = unstable.waybar;
     enable = true;
     systemd.enable = true;
     style = (builtins.readFile "${cfgs}/waybar.style.css");

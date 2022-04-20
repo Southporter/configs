@@ -7,7 +7,19 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: {
+  outputs = inputs: 
+    let
+      cfgs = builtins.fetchGit {
+        url = "https://github.com/ssedrick/configs.git";
+        ref = "master";
+        rev = "e157b96fa5de677fbe42a5e3a2e38d6e784c7814";
+      };
+      unstable = (builtins.trace (builtins.toJSON inputs.pkgs-unstable) inputs.pkgs-unstable);
+      pkgs = import inputs.nixpkgs { overlays = [
+        unstable
+      ];};
+    in
+    {
     homeConfigurations = {
       ssedrick = inputs.home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
@@ -16,7 +28,11 @@
         username = "ssedrick";
         stateVersion = "21.11";
 
-        configuration = { imports = [ ./nix/home.nix ]; };
+        extraSpecialArgs = { inherit cfgs; inherit inputs; };
+
+        configuration = {
+          imports = [ ./nix/home.nix ];
+        };
       };
     };
 
