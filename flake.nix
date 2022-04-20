@@ -12,7 +12,7 @@
       cfgs = builtins.fetchGit {
         url = "https://github.com/ssedrick/configs.git";
         ref = "master";
-        rev = "e157b96fa5de677fbe42a5e3a2e38d6e784c7814";
+        rev = "d6dc18f864584ed0c8d6a74e2ae27aba15485fdc";
       };
       unstable = (builtins.trace (builtins.toJSON inputs.pkgs-unstable) inputs.pkgs-unstable);
       pkgs = import inputs.nixpkgs { overlays = [
