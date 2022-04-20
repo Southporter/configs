@@ -112,14 +112,14 @@ in
     Install = { WantedBy = [ "sway-session.target" ]; };
   };
 
-  # systemd.user.services.swaybg = {
-  #   Unit = { Description = "Swaybg background"; };
-  #   Service = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.swaybg}/bin/swaybg --output '*' -m fill --image '/home/ssedrick/Pictures/wallpaper.jpg'";
-  #   };
-  #   Install = { WantedBy = [ "sway-session.target" ]; };
-  # };
+  systemd.user.services.swaybg = {
+    Unit = { Description = "Swaybg background"; };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.swaybg}/bin/swaybg --output '*' -m fill --image '/home/ssedrick/Pictures/wallpaper.png'";
+    };
+    Install = { WantedBy = [ "sway-session.target" ]; };
+  };
 
   systemd.user.services.swayidle = {
     Unit = { Description = "Swayidle"; };

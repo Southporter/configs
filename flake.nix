@@ -14,10 +14,6 @@
         ref = "master";
         rev = "d6dc18f864584ed0c8d6a74e2ae27aba15485fdc";
       };
-      unstable = (builtins.trace (builtins.toJSON inputs.pkgs-unstable) inputs.pkgs-unstable);
-      pkgs = import inputs.nixpkgs { overlays = [
-        unstable
-      ];};
     in
     {
     homeConfigurations = {
