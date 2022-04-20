@@ -5,13 +5,13 @@
     pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    config-git.url = "github:ssedrick/configs";
   };
 
   outputs = inputs: {
-    homeConfiguration = {
+    homeConfigurations = {
       ssedrick = inputs.home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+
         homeDirectory = "/home/ssedrick";
         username = "ssedrick";
         stateVersion = "21.11";
@@ -20,12 +20,12 @@
       };
     };
 
-    nixosConfiguration = {
+    nixosConfigurations = {
       bayard = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = inputs;
         modules = [
-          ./nix/systems/machines/laptop/hardware-configuration.nix
+          ./nix/systems/laptop/hardware-configuration.nix
           ./nix/systems/configuration.nix
         ];
       };

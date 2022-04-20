@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
-
+let
+  cfgs = builtins.fetchGit {
+    url = "https://github.com/ssedrick/configs.git";
+    ref = "master";
+  };
+in
 {
 
   imports = [ ./nvim.nix ./sway.nix ];
@@ -40,7 +45,7 @@
   };
 
   programs.alacritty.enable = true;
-  xdg.configFile."alacritty/alacritty.yml".source = ../alacritty.yml;
+  xdg.configFile."alacritty/alacritty.yml".source = "${cfgs}/alacritty.yml";
 
   programs.git = {
     enable = true;
@@ -50,6 +55,7 @@
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
+      bbenoist.nix
     ];
   };
 

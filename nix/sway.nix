@@ -2,6 +2,10 @@
 
 let
   pkgsUnstable = import <nixpkgs-unstable> {};
+  cfgs = builtins.fetchGit {
+    url = "https://github.com/ssedrick/configs.git";
+    ref = "master";
+  };
 in
 {
   home.packages = with pkgs; [
@@ -64,7 +68,7 @@ in
     package = pkgsUnstable.waybar;
     enable = true;
     systemd.enable = true;
-    style = (builtins.readFile ../waybar.style.css);
+    style = (builtins.readFile "${cfgs}/waybar.style.css");
 
     settings = [{
       modules-left = [ "sway/workspaces" "sway/mode"];
