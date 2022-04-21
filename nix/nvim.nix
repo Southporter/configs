@@ -17,6 +17,8 @@ in
       rnix-lsp
       rls
       ripgrep
+      nodePackages.pyright
+      clang-tools
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -28,6 +30,8 @@ in
           local lsp = require'lspconfig'
           lsp.rls.setup{}
           lsp.rnix.setup{}
+          lsp.pyright.setup{}
+          lsp.clangd.setup{}
           EOF
         '';
       }
@@ -114,12 +118,13 @@ in
           EOF
         '';
       }
-      
+
       {
         plugin = nvim-tree-lua;
 #        type = "lua";
         config = ''
           lua <<EOF
+          vim.api.nvim_set_keymap("n","<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
           require'nvim-tree'.setup {}
           EOF
           '';
