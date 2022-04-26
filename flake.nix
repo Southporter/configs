@@ -46,9 +46,7 @@
         specialArgs = inputs;
         modules = [
           ./nix/systems/drake/hardware-configuration.nix
-          "${inputs.nixpkgs.modulesPath}/profiles/hardened.nix"
-          # inputs.nixpkgs.nixos.modules.profiles.minimal
-          # inputs.nixpkgs.nixos.modules.profiles.hardened
+          ./nix/systems/hardening.nix
           ./nix/systems/rpi3/configuration.nix
           ./nix/systems/drake/configuration.nix
           ./nix/modules/containers/podman.nix
