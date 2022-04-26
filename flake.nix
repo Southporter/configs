@@ -49,8 +49,8 @@
           ./nix/systems/hardening.nix
           ./nix/systems/rpi3/configuration.nix
           ./nix/systems/drake/configuration.nix
-          ./nix/modules/containers/podman.nix
-          ./nix/modules/containers/adguardhome.nix
+          # ./nix/modules/containers/podman.nix
+          # ./nix/modules/containers/adguardhome.nix
         ];
       };
     };
