@@ -42,7 +42,7 @@
         ];
       };
       drake = inputs.nixpkgs.lib.nixosSystem {
-        system = "armv7l-linux";
+        system = "aarch64-linux";
         specialArgs = inputs;
         modules = [
           ./nix/systems/drake/hardware-configuration.nix
