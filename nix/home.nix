@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
