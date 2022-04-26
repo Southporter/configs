@@ -12,4 +12,10 @@
     "bluetooth" "btqca" "btsdio" "btbcm"
   ];
 
+  security.sudo.wheelNeedsPassword = false;
+
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
 }
