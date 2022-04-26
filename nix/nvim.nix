@@ -96,6 +96,7 @@ in
       }
       popup-nvim plenary-nvim telescope-nvim nvim-treesitter
       telescope-fzf-native-nvim playground 
+      vim-tmux-navigator
 
       {
         plugin = harpoon;

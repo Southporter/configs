@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   unstable = import inputs.pkgs-unstable { inherit (pkgs.stdenv.targetPlatform) system; };
@@ -9,7 +9,7 @@ in
     enable = true;
     package = unstable.tmux;
 
-    prefix = "s";
+    prefix = "C-s";
     shell = "${pkgs.fish}/bin/fish";
     keyMode = "vi";
 
@@ -17,7 +17,6 @@ in
       tmuxPlugins.sensible
       # resurrect
       tmuxPlugins.yank
-      vimPlugins.vim-tmux-navigator
     ];
 
     extraConfig = ''
