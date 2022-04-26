@@ -1,7 +1,7 @@
 { pkgs, modulesPath, ... }:
 
 {
-  import = [
+  imports = [
     "${modulesPath}/profiles/minimal.nix"
     "${modulesPath}/profiles/hardened.nix"
   ];

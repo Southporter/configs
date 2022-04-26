@@ -3,7 +3,7 @@
 {
   networking.firewall.allowedTCPPorts = [ 53 3000 ];
   networking.firewall.allowedUDPPorts = [ 53 ];
-  virtualization.oci-containers.containers.adguardhome = {
+  virtualisation.oci-containers.containers.adguardhome = {
     image = "docker.io/library/adguard/adguardhome";
     ports = [
       "53:53/udp"
