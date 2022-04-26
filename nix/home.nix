@@ -2,7 +2,6 @@
 {
 
   imports = [ ./nvim.nix ./sway.nix ];
-
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -52,6 +51,8 @@
       bbenoist.nix
     ];
   };
+
+  services.tailscale.enable = true;
 
   systemd.user.sessionVariables = {
     EDITOR = "vim";

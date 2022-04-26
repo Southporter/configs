@@ -97,12 +97,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim htop wget firefox curl fish alacritty killall
-    git rustup
+    git rustup tailscale
   ];
 
   programs.ssh = {
     startAgent = true;
   };
+  services.tailscale.enable = true;
 
   programs.sway = {
     enable = true;
