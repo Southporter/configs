@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -43,19 +43,12 @@
   programs.git = {
     enable = true;
   };
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-    extensions = with pkgs.vscode-extensions; [
-      vscodevim.vim
-      bbenoist.nix
-    ];
-  };
 
   # services.tailscale.enable = true;
 
   systemd.user.sessionVariables = {
     EDITOR = "vim";
     SYSTEM_EDITOR = "vim";
+    NIXOS_OZONE_WL = 1;
   };
 }
