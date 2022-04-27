@@ -51,6 +51,7 @@
           ./nix/systems/drake/configuration.nix
           # ./nix/modules/containers/podman.nix
           ./nix/adguardhome.nix
+          ./nix/gitea.nix
         ];
       };
     };
