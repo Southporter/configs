@@ -12,7 +12,7 @@
       cfgs = builtins.fetchGit {
         url = "https://github.com/ssedrick/configs.git";
         ref = "master";
-        rev = "d6dc18f864584ed0c8d6a74e2ae27aba15485fdc";
+        rev = "0f7858c789e976c3cce96b9baa4f62c1b225a816";
       };
     in
     {
