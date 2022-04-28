@@ -83,12 +83,19 @@ async def manage_filters(adguard: AdGuardHome):
     status = await adguard.request('filtering/status')
     filters = status['filters']
     for key, value in blacklists.items():
-        found = next(item for item in filters if item['url'] == value)
-        if found is not None:
-            print("Already added")
-            continue
+        found = None
+        if filters is not None:
+            try:
+                found = next(item for item in filters if item['url'] == value)
+            except StopIteration:
+                pass
         try:
+            if found is not None:
+                print("Already added")
+                continue
+
             await adguard.filtering.add_url(url=value, allowlist=False, name=key)
+            await adguard.filtering.disable_url(url=value, allowlist=False)
             print(f"Added {key}")
         except AdGuardHomeError as age:
             print(f"Error adding {key}")

@@ -43,7 +43,7 @@
       };
       drake = inputs.nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = inputs;
+        specialArgs = { inherit inputs; inherit cfgs; };
         modules = [
           ./nix/systems/drake/hardware-configuration.nix
           ./nix/systems/hardening.nix
