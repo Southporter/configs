@@ -68,6 +68,12 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  programs.htop.enable = true;
+  programs.htop.settings = {
+    hide_kernel_threads = true;
+    hide_userland_threads = true;
+  };
+
   # Open ports in the firewall.
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 22 ];
