@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -38,6 +38,7 @@
   };
 
   programs.alacritty.enable = true;
+
   xdg.configFile."alacritty/alacritty.yml".source = "${cfgs}/alacritty.yml";
 
   programs.git = {
