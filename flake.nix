@@ -47,12 +47,11 @@
         system = "aarch64-linux";
         specialArgs = { inherit inputs; inherit cfgs; };
         modules = [
-          ./nix/systems/rpi3/sd-card.nix
           ./nix/systems/drake/hardware-configuration.nix
           ./nix/systems/hardening.nix
           ./nix/systems/rpi3/configuration.nix
           ./nix/systems/drake/configuration.nix
-          ./nix/modules/containers/podman.nix
+          # ./nix/modules/containers/podman.nix
           ./nix/modules/containers/adguardhome.nix
           ./nix/gitea.nix
         ];
