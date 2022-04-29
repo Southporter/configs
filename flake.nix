@@ -17,7 +17,7 @@
         rev = "0f7858c789e976c3cce96b9baa4f62c1b225a816";
       };
     in
-    {
+    rec {
     homeConfigurations = {
       ssedrick = inputs.home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
@@ -47,6 +47,7 @@
         system = "aarch64-linux";
         specialArgs = { inherit inputs; inherit cfgs; };
         modules = [
+          ./nix/systems/rpi3/sd-card.nix
           ./nix/systems/drake/hardware-configuration.nix
           ./nix/systems/hardening.nix
           ./nix/systems/rpi3/configuration.nix
@@ -57,5 +58,6 @@
         ];
       };
     };
+    image.rpi3 = inputs.self.nixosConfigurations.drake.config.system.build.sdImage;
   };
 }
