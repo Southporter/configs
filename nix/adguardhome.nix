@@ -15,8 +15,9 @@ in
   };
 
   systemd.services.adguardhome = {
-    Service = {
+    serviceConfig = {
       ExecStopPost = "${python}/bin/python ${cfgs}/scripts/adguardhome/stop.py";
+      ExecStartPost = "cd ${cfgs}/scripts/adguardhome && ${python}/bin/python start.py";
     };
   };
 }

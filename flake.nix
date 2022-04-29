@@ -5,6 +5,8 @@
     pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: 
@@ -49,8 +51,8 @@
           ./nix/systems/hardening.nix
           ./nix/systems/rpi3/configuration.nix
           ./nix/systems/drake/configuration.nix
-          # ./nix/modules/containers/podman.nix
-          ./nix/adguardhome.nix
+          ./nix/modules/containers/podman.nix
+          ./nix/modules/containers/adguardhome.nix
           ./nix/gitea.nix
         ];
       };

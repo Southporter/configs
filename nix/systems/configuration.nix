@@ -62,9 +62,6 @@
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Enable sound.
   sound.enable = false;
   # hardware.pulseaudio.enable = true;
@@ -97,8 +94,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim htop wget firefox curl fish alacritty killall
-    git rustup tailscale
+    git rustup tailscale sops
   ];
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [ hplip ];
+  };
 
   programs.ssh = {
     startAgent = true;
