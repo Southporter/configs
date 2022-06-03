@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }:
 
-let
+let 
   unstable = import inputs.pkgs-unstable { inherit (pkgs.stdenv.targetPlatform) system; };
 in
 {
@@ -16,9 +16,12 @@ in
       silver-searcher
       rnix-lsp
       rls
+      terraform-ls
       ripgrep
       nodePackages.pyright
       clang-tools
+      elmPackages.elm-language-server
+      gopls
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -32,6 +35,9 @@ in
           lsp.rnix.setup{}
           lsp.pyright.setup{}
           lsp.clangd.setup{}
+          lsp.terraformls.setup{}
+          lsp.elmls.setup{}
+          lsp.gopls.setup{}
           EOF
         '';
       }
@@ -75,7 +81,8 @@ in
       }
       vim-commentary
 
-      rust-vim vim-fish vim-nix
+      rust-vim vim-fish vim-nix vim-terraform vim-terraform-completion 
+      vim-polyglot elm-vim
 
       {
         plugin = telescope-nvim;

@@ -39,3 +39,6 @@
 
 [pull]
 	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/nix/store/rvzyp24ljxh1am8vsdvvipjwscv31cyf-gh-2.2.0/bin/gh auth git-credential

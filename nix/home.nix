@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ./ansible.nix ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -22,6 +22,9 @@
     pantheon.granite
     pantheon.elementary-gtk-theme
     gnome3.adwaita-icon-theme
+
+    bitwarden-cli
+    elmPackages.elm
   ];
 
   # Let Home Manager install and manage itself.

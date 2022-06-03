@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   # imports =
@@ -48,6 +48,7 @@
   #
 
   security.sudo.wheelNeedsPassword = false;
+  security.pki.certificateFiles = [ (modulesPath + "/lan.crt") ];
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -77,13 +78,18 @@
   #
 
   programs.fish.enable = true;
+  services.flatpak.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.gtkUsePortal = true;
 
   users.users.ssedrick = {
     isNormalUser = true;
     shell = pkgs.fish;
     home = "/home/ssedrick";
-    extraGroups = [ "wheel" "nixbld" "networkmanager" "audio" "input" "sway" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "nixbld" "networkmanager" "audio" "input" "sway" "flatpak"]; # Enable ‘sudo’ for the user.
   };
+
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
@@ -94,7 +100,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim htop wget firefox curl fish alacritty killall
-    git rustup tailscale sops
+    git rustup tailscale sops ntfs3g parted
+    nix-index brightnessctl
+
+    wineWowPackages.stable
+    helvum pavucontrol
   ];
 
   services.printing = {
@@ -171,11 +181,16 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 5432 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = ''
