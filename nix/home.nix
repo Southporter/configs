@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ./ansible.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -24,6 +24,7 @@
     gnome3.adwaita-icon-theme
 
     bitwarden-cli
+    (ansible.overrideAttrs(oa: { propagatedBuildInputs = oa.propagatedBuildInputs ++ [ python3Packages.cryptography python3Packages.psycopg2 ]; }))
     elmPackages.elm
   ];
 
