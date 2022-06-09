@@ -100,7 +100,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim htop wget firefox curl fish alacritty killall
-    git rustup tailscale sops ntfs3g parted
+    openssh git rustup tailscale sops ntfs3g parted
     nix-index brightnessctl
 
     wineWowPackages.stable
