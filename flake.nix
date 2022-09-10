@@ -1,7 +1,7 @@
 {
   description = "System Configuration for ssedrick";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
     pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,21 +16,27 @@
         ref = "master";
         rev = "0f7858c789e976c3cce96b9baa4f62c1b225a816";
       };
+      system = "x86_64-linux";
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     rec {
     homeConfigurations = {
       ssedrick = inputs.home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
+        inherit pkgs;
+        modules = [
+          ./nix/home.nix
+        ];
+        # system = "x86_64-linux";
 
-        homeDirectory = "/home/ssedrick";
-        username = "ssedrick";
-        stateVersion = "21.11";
+        # homeDirectory = "/home/ssedrick";
+        # username = "ssedrick";
+        # stateVersion = "21.11";
 
         extraSpecialArgs = { inherit cfgs; inherit inputs; };
 
-        configuration = {
-          imports = [ ./nix/home.nix ];
-        };
+        # configuration = {
+        #   imports = [ ./nix/home.nix ];
+        # };
       };
     };
 
