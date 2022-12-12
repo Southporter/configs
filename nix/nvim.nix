@@ -5,7 +5,7 @@ let
 in
 {
   programs.neovim = {
-    package = unstable.neovim-unwrapped;
+    # package = unstable.neovim-unwrapped;
     enable = true;
     vimAlias = true;
     withPython3 = true;
@@ -39,35 +39,6 @@ in
           EOF
         '';
       }
-      lsp_extensions-nvim
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      cmp-emoji
-      cmp-cmdline
-      {
-        plugin = nvim-cmp;
-#        type = "lua";
-        config = ''
-          lua <<EOF
-          local cmp = require'cmp'
-          cmp.setup{
-            sources = {
-              { name = 'spell' },
-              { name = 'buffer' },
-              { name = 'nvim_lsp' },
-              { name = 'path' },
-              { name = 'cmdline' },
-              { name = 'emoji' },
-            },
-            mapping = {
-              ['<C-Space>'] = cmp.mapping.complete(),
-              ['<CR>'] = cmp.mapping.confirm({ select = true }),
-            },
-          }
-          EOF
-          '';
-      }
       {
         plugin = nvim-autopairs;
 #        type = "lua";
@@ -77,10 +48,84 @@ in
           EOF
           '';
       }
+      lsp_extensions-nvim
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-emoji
+      cmp-cmdline
+      cmp-conjure
+      {
+        plugin = nvim-cmp;
+#        type = "lua";
+        config = ''
+          lua <<EOF
+          local cmp_autopairs = require'nvim-autopairs.completion.cmp'
+          local cmp = require'cmp'
+          cmp.setup{
+            sources = {
+              { name = 'spell' },
+              { name = 'buffer' },
+              { name = 'nvim_lsp' },
+              { name = 'treesitter'},
+              { name = 'conjure'},
+              { name = 'path' },
+              { name = 'cmdline' },
+              { name = 'emoji' },
+            },
+            mapping = {
+              ['<C-Space>'] = cmp.mapping.complete(),
+              ['<CR>'] = cmp.mapping.confirm({ select = true }),
+              ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+              ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+              ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                  local entry = cmp.get_selected_entry()
+                  if not entry then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                  else
+                    cmp.confirm()
+                  end
+                else
+                  fallback()
+                end
+              end, {"i", "s", "c"}),
+             },
+             snippet = {
+               expand = function(args)
+                 require'luasnip'.lsp_expand(args.body)
+               end,
+             }
+          }
+          cmp.event:on(
+            'confirm_done',
+            cmp_autopairs.on_confirm_done()
+            )
+          EOF
+          '';
+      }
       vim-commentary
 
       vim-fish vim-nix vim-terraform vim-terraform-completion 
       vim-polyglot elm-vim
+
+      {
+        plugin = dart-vim-plugin;
+        config = ''
+          lua <<EOF
+          require'lspconfig'.dartls.setup{}
+          EOF
+          '';
+      }
+
+      {
+        plugin = zig-vim;
+        config = ''
+          lua <<EOF
+          require'lspconfig'.zls.setup{}
+          EOF
+        '';
+      }
 
       rust-vim 
       {
@@ -181,6 +226,16 @@ in
       nord-nvim nightfox-nvim
 
       vim-devicons
+
+      {
+        plugin = conjure;
+        config = ''
+          lua <<EOF
+          require'lspconfig'.clojure_lsp.setup{}
+          EOF
+        '';
+      }
+
     ];
 
     extraConfig = ''
@@ -194,8 +249,6 @@ in
       set encoding=UTF-8
 
       colorscheme nightfox
-
-      let mapleader=" "
     '';
   };
 }

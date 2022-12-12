@@ -37,6 +37,17 @@ in
       };
       focus.followMouse = "no";
 
+      output = {
+        "HDMI-A-1" = {
+          bg = "/home/ssedrick/Pictures/wallpaper.png stretch";
+          pos = "0 0";
+          res = "1920x1080";
+        };
+        "eDP-1" = {
+          pos = "1920 312";
+        };
+      };
+
       keybindings = lib.mkOptionDefault {
         "Mod1+l" = "exec swaylock -e -f -c 000000 -i /home/ssedrick/Pictures/lockscreen.png";
       };

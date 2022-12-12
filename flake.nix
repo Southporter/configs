@@ -1,9 +1,9 @@
 {
   description = "System Configuration for ssedrick";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     pkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,17 +26,9 @@
         modules = [
           ./nix/home.nix
         ];
-        # system = "x86_64-linux";
-
-        # homeDirectory = "/home/ssedrick";
-        # username = "ssedrick";
-        # stateVersion = "21.11";
 
         extraSpecialArgs = { inherit cfgs; inherit inputs; };
 
-        # configuration = {
-        #   imports = [ ./nix/home.nix ];
-        # };
       };
     };
 
