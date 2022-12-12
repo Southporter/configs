@@ -14,7 +14,7 @@
       cfgs = builtins.fetchGit {
         url = "https://github.com/ssedrick/configs.git";
         ref = "master";
-        rev = "0f7858c789e976c3cce96b9baa4f62c1b225a816";
+        rev = "17814d9415e12deaf6acdb22f4e3e3821ec265a4";
       };
       system = "x86_64-linux";
       pkgs = inputs.nixpkgs.legacyPackages.${system};
