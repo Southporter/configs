@@ -29,7 +29,18 @@
         extraSpecialArgs = { inherit cfgs; inherit inputs; };
 
         configuration = {
-          imports = [ ./nix/home.nix ];
+          imports = [ ./nix/home.nix ./nix/sway.nix ./nix/nvim.nix ./nix/tmux.nix ./nix/vscode.nix ];
+        };
+      };
+      "ssedrick@caylent.sedrick.lan" = inputs.home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-darwin";
+
+        username = "ssedrick"; homeDirectory = "/Users/ssedrick";
+        stateVersion = "21.11";
+        extraSpecialArgs = { inherit cfgs; inherit inputs; };
+
+        configuration = {
+          imports = [ ./nix/home.nix ./nix/nvim.nix ./nix/tmux.nix ./nix/vscode.nix ];
         };
       };
     };

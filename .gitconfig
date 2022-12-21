@@ -1,12 +1,12 @@
 [user]
   name = Shem Sedrick
-  email = ssedrick1@gmail.com
+  email = shem.sedrick@caylent.com
 
 [alias]
   c = commit
   co = checkout
   s = status
-  com = checkout master
+  com = !git checkout $ROOT_BRANCH
   sa = stash apply
   ph = push heroku production:master
   b = branch
@@ -32,13 +32,21 @@
 
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
+  path =
 [mergetool "sourcetree"]
   cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
   trustExitCode = true
 
+[push]
+  autoSetupRemote = true
+
 [pull]
 	rebase = true
-[credential "https://github.com"]
-	helper = 
-	helper = !/nix/store/rvzyp24ljxh1am8vsdvvipjwscv31cyf-gh-2.2.0/bin/gh auth git-credential
+; [credential "https://github.com"]
+; 	helper =
+; 	helper = !/usr/local/bin/gh auth git-credential
+; [commit]
+; 	gpgsign = true
+; [credential "https://gist.github.com"]
+; 	helper =
+; 	helper = !/usr/local/bin/gh auth git-credential
