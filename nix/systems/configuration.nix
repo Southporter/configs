@@ -100,8 +100,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim htop wget firefox curl fish alacritty killall
-    git rustup tailscale sops ntfs3g parted
-    nix-index brightnessctl
+    openssh git rustup tailscale sops ntfs3g parted
+    nix-index brightnessctl usbutils
 
     wineWowPackages.stable
     helvum pavucontrol
@@ -160,12 +160,13 @@
   };
 
   programs.waybar.enable = true;
+ 
 
-  # environment.loginShellInit = ''
-  #   if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  #     exec sway
-  #   fi
-  # '';
+  environment.loginShellInit = ''
+    if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+      exec sway
+    fi
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -196,6 +197,8 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+
+  services.udev.packages = [pkgs.qmk-udev-rules pkgs.android-udev-rules];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

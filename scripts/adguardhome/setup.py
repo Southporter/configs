@@ -62,7 +62,7 @@ async def manage_clients(adguard: AdGuardHome):
             print(age)
 
 
-blacklists = lambda: json.load(open('./blacklists.json', 'r'))
+blacklists = json.load(open('./blacklists.json', 'r'))
 
 async def manage_filters(adguard: AdGuardHome):
     status = await adguard.request('filtering/status')
@@ -80,7 +80,7 @@ async def manage_filters(adguard: AdGuardHome):
                 continue
 
             await adguard.filtering.add_url(url=value, allowlist=False, name=key)
-            await adguard.filtering.disable_url(url=value, allowlist=False)
+            # await adguard.filtering.disable_url(url=value, allowlist=False)
             print(f"Added {key}")
         except AdGuardHomeError as age:
             print(f"Error adding {key}")
@@ -115,7 +115,7 @@ async def manage_blocked_apps(adguard: AdGuardHome):
     res = await adguard.request('blocked_services/set', method='POST', json_data=blocked_apps)
 
 async def main():
-    async with AdGuardHome("192.168.1.14", username='admin', password=os.environ['ADGUARD_PASS']) as adguard:
+    async with AdGuardHome("192.168.1.15", username='admin', password=os.environ['ADGUARD_PASS']) as adguard:
 
         await manage_blocked_apps(adguard)
         await manage_dns_config(adguard)

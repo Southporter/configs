@@ -1,7 +1,7 @@
 { config, pkgs, cfgs, ... }:
 {
 
-  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix ];
+  imports = [ ./nvim.nix ./sway.nix ./tmux.nix ./vscode.nix ./fractal.nix  ];
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ssedrick";
@@ -17,15 +17,33 @@
   # changes in each release.
   home.stateVersion = "21.11";
 
+  # nixpkgs = {
+  #   overlays = [
+  #     (final: prev: {
+  #       quickemu = prev.quickemu.override { OVMF = pkgs.OVMFFull.override { secureBoot = true; tpmSupport = true; csmSupport = true; httpSupport = true;}; };
+  #     })
+  #   ];
+  # };
+
   home.packages = with pkgs; [
     pantheon.elementary-files
     pantheon.granite
     pantheon.elementary-gtk-theme
+    midori
     gnome3.adwaita-icon-theme
 
     bitwarden-cli
+    bat
     (ansible.overrideAttrs(oa: { propagatedBuildInputs = oa.propagatedBuildInputs ++ [ python3Packages.cryptography python3Packages.psycopg2 ]; }))
     elmPackages.elm
+    (quickemu.override {
+      OVMF = pkgs.OVMFFull.override {
+        secureBoot = true;
+        tpmSupport = true;
+        csmSupport = true;
+        httpSupport = true;
+      };
+    })
   ];
 
   # Let Home Manager install and manage itself.
