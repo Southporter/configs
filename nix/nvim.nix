@@ -137,7 +137,6 @@ in
           local opts = {
               tools = { -- rust-tools options
                   autoSetHints = true,
-                  hover_with_actions = true,
                   inlay_hints = {
                       show_parameter_hints = false,
                       parameter_hints_prefix = "",
@@ -150,7 +149,12 @@ in
               -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
               server = {
                   -- on_attach is a callback called when the language server attachs to the buffer
-                  -- on_attach = on_attach,
+                  on_attach = function(_, bufnr)
+                                -- Hover actions
+                                vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+                                -- Code action groups
+                                vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+                              end,
                   settings = {
                       -- to enable rust-analyzer settings visit:
                       -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -186,15 +190,45 @@ in
           EOF
         '';
       }
-      popup-nvim plenary-nvim telescope-nvim nvim-treesitter
+      popup-nvim plenary-nvim telescope-nvim
+      {
+        plugin = nvim-treesitter;
+        type = "lua";
+        config = ''
+          require "nvim-treesitter.configs".setup {
+            playground = {
+              enable = true,
+              disable = {},
+              updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+              persist_queries = false, -- Whether the query persists across vim sessions
+              keybindings = {
+                toggle_query_editor = 'o',
+                toggle_hl_groups = 'i',
+                toggle_injected_languages = 't',
+                toggle_anonymous_nodes = 'a',
+                toggle_language_display = 'I',
+                focus_language = 'f',
+                unfocus_language = 'F',
+                update = 'R',
+                goto_node = '<cr>',
+                show_help = '?',
+              },
+            },
+            query_linter = {
+              enable = true,
+              use_virtual_text = true,
+              lint_events = {"BufWrite", "CursorHold"},
+            },
+          }
+        '';
+      }
       telescope-fzf-native-nvim playground 
       vim-tmux-navigator
 
       {
         plugin = harpoon;
-#        type = "lua";
+        type = "lua";
         config = ''
-          lua <<EOF
           local silent = { noremap = true, silent = true }
           local noremap = { noremap = true }
           vim.api.nvim_set_keymap("n","<leader>m", ":lua require('harpoon.mark').add_file()<CR>", silent)
@@ -208,18 +242,15 @@ in
             command Mark :lua require('harpoon.mark').add_file()
             command ViewMark :lua require('harpoon.ui').toggle_quick_menu()
           ]])
-          EOF
         '';
       }
 
       {
         plugin = nvim-tree-lua;
-#        type = "lua";
+        type = "lua";
         config = ''
-          lua <<EOF
           vim.api.nvim_set_keymap("n","<C-n>", ":NvimTreeToggle<CR>", { noremap = true })
           require'nvim-tree'.setup {}
-          EOF
           '';
       }
 

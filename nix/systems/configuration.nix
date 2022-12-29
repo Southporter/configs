@@ -3,7 +3,34 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, modulesPath, ... }:
-
+let
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+    
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      '';
+    };
+    
+    configure-gtk = pkgs.writeTextFile {
+      name = "configure-gtk";
+      destination = "/bin/configure-gtk";
+      executable = true;
+      
+      text = let
+        schema = pkgs.gsettings-desktop-schemas;
+        datadir = "${schema}/share/gsettings-desktop-schemas/${schema.name}";
+      in ''
+        export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+        gnome_schema=org.gnome.desktop.interface
+        gsettings set $gnome_schema gtk-theme 'Drakula'
+        '';
+    };
+in
 {
   # imports =
   #   [ # Include the results of the hardware scan.
@@ -80,8 +107,12 @@
   programs.fish.enable = true;
   services.flatpak.enable = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.gtkUsePortal = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
+  services.dbus.enable = true;
 
   users.users.ssedrick = {
     isNormalUser = true;
@@ -102,9 +133,13 @@
     vim htop wget firefox curl fish alacritty killall
     openssh git rustup tailscale sops ntfs3g parted
     nix-index brightnessctl usbutils
+    
+    sway dbus-sway-environment configure-gtk wayland xdg-utils
+    glib dracula-theme gnome3.adwaita-icon-theme
+    swaylock swayidle notify-desktop swaybg albert wl-clipboard
+    grim slurp mako wofi
 
-    wineWowPackages.stable
-    helvum pavucontrol
+    wineWowPackages.stable helvum pavucontrol
   ];
 
   services.printing = {
@@ -116,48 +151,50 @@
     startAgent = true;
   };
   services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
 
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      swaylock
-      swayidle
-      waybar
-      wl-clipboard
-      wofi
-      dmenu
-      mako
-      swaybg
-    ];
+    
+    # extraPackages = with pkgs; [
+    #   swaylock
+    #   swayidle
+    #   waybar
+    #   wl-clipboard
+    #   wofi
+    #   dmenu
+    #   mako
+    #   swaybg
+    # ];
   };
 
-  systemd.user.targets.sway-session = {
-    description = "Sway Compositor Session";
-    documentation = [ "man:systemd.special(7)" ];
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
-  };
+  # systemd.user.targets.sway-session = {
+  #   description = "Sway Compositor Session";
+  #   documentation = [ "man:systemd.special(7)" ];
+  #   bindsTo = [ "graphical-session.target" ];
+  #   wants = [ "graphical-session-pre.target" ];
+  #   after = [ "graphical-session-pre.target" ];
+  # };
 
-  systemd.user.services.sway = {
-    description = "Sway - Wayland window manager";
-    documentation = [ "man:sway(5)" ];
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
+  # systemd.user.services.sway = {
+  #   description = "Sway - Wayland window manager";
+  #   documentation = [ "man:sway(5)" ];
+  #   bindsTo = [ "graphical-session.target" ];
+  #   wants = [ "graphical-session-pre.target" ];
+  #   after = [ "graphical-session-pre.target" ];
 
-    environment.PATH = lib.mkForce null;
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''
-        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
-      '';
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
-  };
+  #   environment.PATH = lib.mkForce null;
+  #   serviceConfig = {
+  #     Type = "simple";
+  #     ExecStart = ''
+  #       ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+  #     '';
+  #     Restart = "on-failure";
+  #     RestartSec = 1;
+  #     TimeoutStopSec = 10;
+  #   };
+  # };
 
   programs.waybar.enable = true;
  
