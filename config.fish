@@ -14,7 +14,7 @@ switch (uname)
 end
 
 
-# contains /snap/bin $PATH; or set -x PATH $PATH /snap/bin
+contains /snap/bin $PATH; or set -x PATH $PATH /snap/bin
 contains $HOME/.local/bin $PATH; or set -x PATH $PATH $HOME/.local/bin
 contains $HOME/.cargo/bin $PATH; or set -x PATH $PATH $HOME/.cargo/bin
 contains $HOME/go/bin $PATH; or set -x PATH $PATH $HOME/go/bin
@@ -26,6 +26,7 @@ alias kctx kubectx
 alias kns kubens
 
 alias ls lsd
+alias vim nvim
 
 function add-ssh-key
     set -l fingerprint (ssh-keygen -l -f $argv[1] | awk '{split($0,a); print a[2]}')

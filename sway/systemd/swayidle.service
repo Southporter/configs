@@ -1,0 +1,13 @@
+[Install]
+WantedBy=sway-session.target
+
+[Service]
+ExecStart=/usr/bin/swayidle -w \
+        timeout 300 'swaylock -f -c 000000 -i "/usr/share/desktop-base/active-theme/lockscreen/contents/images/1920x1080.png"' \
+        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -c 000000 -i "/usr/share/desktop-base/active-theme/lockscreen/contents/images/1920x1080.png"'
+
+Type=simple
+
+[Unit]
+Description=Swayidle

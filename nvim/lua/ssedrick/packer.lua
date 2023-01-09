@@ -30,14 +30,19 @@ return require("packer").startup(function(use)
     use {"juliosueiras/vim-terraform-completion", ft = {"terraform"}}
     use {"ekalinin/dockerfile.vim", ft = {"Dockerfile", "yaml.docker-compose"}}
     use("jose-elias-alvarez/typescript.nvim")
-    use("sheerun/vim-polyglot")
     use("mfussenegger/nvim-lint")
 
     use("sbdchd/neoformat")
     use("nvim-lua/popup.nvim")
     use("nvim-lua/plenary.nvim")
     use("nvim-telescope/telescope.nvim")
-    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
     use 'nvim-treesitter/nvim-treesitter-context'
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
     use("nvim-treesitter/playground")

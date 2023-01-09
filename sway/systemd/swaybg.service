@@ -1,0 +1,8 @@
+[Install]
+WantedBy=sway-session.target
+
+[Service]
+ExecStart=/usr/bin/swaybg --output '*' -m fill --image '/usr/share/desktop-base/active-theme/wallpaper/contents/images/1920x1080.svg'
+Type=simple
+[Unit]
+Description=Swaybg background

@@ -1,8 +1,19 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "all",
-    ignore_install = {"dockerfile"},
+    ensure_installed = {
+        "fish",
+        "rust",
+        "c",
+        "lua",
+        "zig",
+        "nix",
+        "bash",
+        "jsonc",
+        "yaml",
+        "query",
+    },
     sync_install = false,
 
+    prefer_git = true,
     highlight = {enable = true, additional_vim_regex_highlighting = false}
 }
 
