@@ -41,6 +41,7 @@ lsp.terraformls.setup(config())
 lsp.tsserver.setup(config())
 lsp.dockerls.setup(config())
 lsp.yamlls.setup(config())
+-- lsp["rust-analyzer"].setup(config())
 lsp["sumneko_lua"].setup({
     settings = { -- custom settings for lua
         Lua = {
@@ -88,8 +89,7 @@ local lspkind = require("lspkind")
 cmp.setup {
     sources = cmp.config.sources({
         {name = 'nvim_lsp'}, {name = 'treesitter'}, {name = 'luasnip'},
-        {name = 'spell'}, {name = 'buffer'}, {name = 'path'},
-        {name = 'cmdline'}, {name = 'emoji'}
+        {name = 'spell'}, {name = 'buffer'}, {name = 'path'}, {name = 'emoji'}
     }),
     mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),

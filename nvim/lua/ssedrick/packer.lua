@@ -21,7 +21,10 @@ return require("packer").startup(function(use)
     use("windwp/nvim-autopairs")
     use("tpope/vim-commentary")
 
-    use {"rust-lang/rust.vim", ft = {"rust"}}
+    -- Visualize lsp progress
+    use({"j-hui/fidget.nvim", config = function() require("fidget").setup() end})
+
+    use("simrat39/rust-tools.nvim")
     use {"dag/vim-fish", ft = {"fish"}}
     use {"hashivim/vim-terraform", ft = {"terraform"}}
     use {"juliosueiras/vim-terraform-completion", ft = {"terraform"}}
@@ -42,6 +45,7 @@ return require("packer").startup(function(use)
     use("christoomey/vim-tmux-navigator")
     use({"glepnir/lspsaga.nvim", branch = "main"})
     use("onsails/lspkind.nvim")
+    use("gpanders/editorconfig.nvim")
     --
     -- use("mfussenegger/nvim-dap")
     -- use("rcarriga/nvim-dap-ui")
@@ -54,4 +58,8 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use("edeneast/nightfox.nvim")
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
 end)
