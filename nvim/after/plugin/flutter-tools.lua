@@ -1,9 +1,13 @@
-require("flutter-tools").setup{
-  flutter_lookup_cmd = "asdf where flutter"
-}
+local ok, flutter = pcall(require, 'flutter-tools')
 
-require('telescope').load_extension("flutter")
+if ok then
+    flutter.setup{
+      flutter_lookup_cmd = "rtx where flutter"
+    }
+
+    require('telescope').load_extension("flutter")
 
 
-local opts = { noremap = true }
-vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope flutter commands<CR>", opts)
+    local opts = { noremap = true }
+    vim.api.nvim_set_keymap("n", "<C-f>", ":Telescope flutter commands<CR>", opts)
+end

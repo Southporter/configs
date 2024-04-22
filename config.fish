@@ -1,19 +1,3 @@
-switch (uname)
-    case Darwin
-        # For homebrew asdf
-        source (brew --prefix asdf)/libexec/asdf.fish >>~/.config/fish/config.fish
-        if test -d (brew --prefix)"/share/fish/completions"
-            set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
-        end
-
-        if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-            set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
-        end
-    case '*'
-        source ~/.asdf/asdf.fish
-end
-
-
 contains /snap/bin $PATH; or set -x PATH $PATH /snap/bin
 contains $HOME/.local/bin $PATH; or set -x PATH $PATH $HOME/.local/bin
 contains $HOME/.cargo/bin $PATH; or set -x PATH $PATH $HOME/.cargo/bin
@@ -25,8 +9,8 @@ alias k kubectl
 alias kctx kubectx
 alias kns kubens
 
-alias ls lsd
 alias vim nvim
+
 
 function add-ssh-key
     set -l fingerprint (ssh-keygen -l -f $argv[1] | awk '{split($0,a); print a[2]}')

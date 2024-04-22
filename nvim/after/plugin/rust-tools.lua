@@ -34,4 +34,7 @@ local opts = {
     }
 }
 
-require("rust-tools").setup(opts)
+local ok, rust = pcall(require, 'rust-tools')
+if ok then
+  rust.setup(opts)
+end

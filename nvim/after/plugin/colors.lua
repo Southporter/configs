@@ -1,1 +1,1 @@
-vim.api.nvim_command [[colorscheme nightfox]]
+vim.api.nvim_command [[colorscheme kanagawa]]

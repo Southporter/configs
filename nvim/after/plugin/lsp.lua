@@ -37,23 +37,26 @@ end
 
 local lsp = require 'lspconfig'
 lsp.pyright.setup(config())
-lsp.terraformls.setup(config())
-lsp.tsserver.setup(config())
-lsp.dockerls.setup(config())
-lsp.yamlls.setup(config())
+-- lsp.terraformls.setup(config())
+-- lsp.tsserver.setup(config())
+-- lsp.dockerls.setup(config())
+-- lsp.yamlls.setup(config())
 -- lsp["rust-analyzer"].setup(config())
-lsp["sumneko_lua"].setup({
+lsp["lua_ls"].setup({
     settings = { -- custom settings for lua
         Lua = {
+          completion = {
+                callSnippet = 'Replace',
+              },
             -- make the language server recognize "vim" global
             diagnostics = {globals = {"vim"}},
-            workspace = {
-                -- make language server aware of runtime files
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.stdpath("config") .. "/lua"] = true
-                }
-            }
+            -- workspace = {
+            --     -- make language server aware of runtime files
+            --     library = {
+            --         [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            --         [vim.fn.stdpath("config") .. "/lua"] = true
+            --     }
+            -- }
         }
     }
 })
@@ -93,10 +96,10 @@ cmp.setup {
     }),
     mapping = cmp.mapping.preset.insert({
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({select = true}),
+        -- ['<CR>'] = cmp.mapping.confirm({select = true}),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<CR>"] = cmp.mapping(function(fallback)
             -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
             if cmp.visible() then
                 local entry = cmp.get_selected_entry()

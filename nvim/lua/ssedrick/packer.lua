@@ -40,18 +40,18 @@ return require("packer").startup(function(use)
     use("nvim-treesitter/playground")
     use("kyazdani42/nvim-tree.lua")
     use("christoomey/vim-tmux-navigator")
-    use({"glepnir/lspsaga.nvim", branch = "main"})
+    use({"nvimdev/lspsaga.nvim", after = 'nvim-lspconfig'})
     use("onsails/lspkind.nvim")
     use("gpanders/editorconfig.nvim")
 
-    use("simrat39/rust-tools.nvim")
+    use({"simrat39/rust-tools.nvim", ft = {"rust"}})
     use {"dag/vim-fish", ft = {"fish"}}
     use {"hashivim/vim-terraform", ft = {"terraform"}}
     use {"juliosueiras/vim-terraform-completion", ft = {"terraform"}}
     use {"ekalinin/dockerfile.vim", ft = {"Dockerfile", "yaml.docker-compose"}}
     use("jose-elias-alvarez/typescript.nvim")
     use("mfussenegger/nvim-lint")
-    use {"akinsho/flutter-tools.nvim", requires = {'nvim-lua/plenary.nvim'}}
+    -- use {"akinsho/flutter-tools.nvim", requires = {'nvim-lua/plenary.nvim'}}
 
     --
     -- use("mfussenegger/nvim-dap")
@@ -65,6 +65,7 @@ return require("packer").startup(function(use)
     use("ThePrimeagen/harpoon")
 
     use("edeneast/nightfox.nvim")
+    use("rebelot/kanagawa.nvim")
     use {
         'nvim-lualine/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}

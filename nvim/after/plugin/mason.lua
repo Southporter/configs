@@ -4,8 +4,7 @@ local lsp_config = require 'mason-lspconfig'
 mason.setup()
 lsp_config.setup({
     ensure_installed = {
-        "jsonls", "sumneko_lua", "tsserver", "pyright", "terraformls", "tflint",
-        "yamlls"
+        "lua_ls", "pyright", "yamlls"
     },
     automatic_installation = true
 })
